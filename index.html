@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>604 Forex Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background: #0d1421; color: #d1d4dc; font-family: Arial; margin: 0; padding: 15px;}
+    h1 { color: #2962ff; text-align: center; margin: 10px 0; font-size: 30px; }
+    h2 { color: #00ff88; margin: 25px 0 10px 0; text-align: center; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .chart { height: 40vh; border: 1px solid #2a2e39; border-radius: 5px; }
+    .calc { background: #1e222d; padding: 20px; border-radius: 8px; max-width: 500px; margin: 20px auto; border: 1px solid #2a2e39; }
+    .calc input { width: 95%; padding: 10px; margin: 8px 0; background: #131722; border: 1px solid #2a2e39; color: #fff; border-radius: 4px; }
+    .calc button { background: #2962ff; color: #fff; padding: 12px 25px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
+    .result { color: #00ff88; font-size: 20px; margin-top: 15px; font-weight: bold; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .chart { height: 350px; } }
+  </style>
+</head>
+<body>
+  <h1>MUNOOKING604 FOREX 📊</h1>
+  
+  <div class="grid">
+    <iframe class="chart" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:EURUSD&interval=15&theme=dark"></iframe>
+    <iframe class="
