@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUNOOKING604 FOREX</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #FFD700;
+    --gold2: #FFA500;
+    --bg: #020408;
+    --bg2: #060d14;
+    --bg3: #0a1520;
+    --panel: #0d1b2a;
+    --border: #1a3a5c;
+    --green: #00ff88;
+    --red: #ff3355;
+    --text: #c8d8e8;
+    --dim: #4a6a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid Background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,215,0,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,215,0,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 0 24px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(255,215,0,0.05) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(255,215,0,0.2);
+  }
+
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+
+  .logo span {
+    font-size: 0.65rem;
+    font-weight: 400;
+    display: block;
+    color: var(--dim);
+    -webkit-text-fill-color: var(--dim);
+    letter-spacing: 4px;
+    margin-top: -4px;
+  }
+
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--green);
+    letter-spacing: 2px;
+  }
+
+  .pulse {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  nav button {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--dim);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  nav button:hover, nav button.active {
+    color: var(--gold);
+    border-color: rgba(255,215,0,0.3);
+    background: rgba(255,215,0,0.05);
+  }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 48px;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+    padding: 0 24px;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .tick-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .tick-item .sym { color: var(--gold); }
+  .tick-item .up { color: var(--green); }
+  .tick-item .dn { color: var(--red); }
+
+  /* MAIN CONTENT */
+  main {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 28px 20px;
+  }
+
+  /* SECTION TITLE */
+  .sec-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sec-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,215,0,0.4), transparent);
+  }
+
+  /* PANEL */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  /* CHARTS GRID */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 16px;
+  }
+
+  .chart-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .chart-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    z-index: 1;
+  }
+
+  .chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.3);
+  }
+
+  .chart-sym {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+
+  .chart-badge {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .chart-badge.bull { background: rgba(0,255,136,0.15); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
+  .chart-badge.bear { background: rgba(255,51,85,0.15); color: var(--red); border: 1px solid rgba(255,51,85,0.3); }
+
+  .tradingview-widget-container { height: 350px; }
+
+  /* RISK CALCULATOR */
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .calc-grid { grid-template-columns: 1fr; }
+    .charts-grid { grid-template-columns: 1fr; }
+    nav { display: none; }
+    .mobile-nav { display: flex !important; }
+  }
+
+  .input-group {
+    margin-bottom: 14px;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .input-group input, .input-group select {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .input-group input:focus, .input-group select:focus {
+    border-color: var(--gold);
+  }
+
+  .input-group select option { background: var(--panel); }
+
+  .calc-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border: none;
+    border-radius: 3px;
+    color: #000;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 13px;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .calc-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(255,215,0,0.3);
+  }
+
+  .result-box {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+  }
+
+  .result-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26,58,92,0.5);
+  }
+
+  .result-row:last-child { border-bottom: none; }
+
+  .result-label {
+    font-size: 0.78rem;
+    color: var(--dim);
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .result-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .result-val.loss { color: var(--red); }
+  .result-val.gain { color: var(--green); }
+
+  .rr-bar {
+    margin-top: 18px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 2px;
+    height: 6px;
+    overflow: hidden;
+  }
+
+  .rr-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--green));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+
+  /* LIQUIDITY MAP */
+  .liq-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .liq-container { grid-template-columns: 1fr; }
+  }
+
+  .liq-canvas-wrap {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  canvas#liqMap {
+    display: block;
+    width: 100%;
+  }
+
+  .liq-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .legend-item {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px;
+  }
+
+  .legend-item .l-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .legend-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .legend-strength {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+
+  .strength-bar {
+    height: 3px;
+    border-radius: 2px;
+    margin-top: 4px;
+  }
+
+  /* MOBILE NAV */
+  .mobile-nav {
+    display: none;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 8px 0 12px;
+    justify-content: space-around;
+  }
+
+  .mobile-nav button {
+    background: none;
+    border: none;
+    color: var(--dim);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    transition: color 0.2s;
+  }
+
+  .mobile-nav button.active { color: var(--gold); }
+
+  .mobile-nav button svg { width: 20px; height: 20px; }
+
+  @media (max-width: 768px) {
+    main { padding-bottom: 80px; }
+  }
+
+  /* GLOW TEXT */
+  .glow { text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--dim);
+    letter-spacing: 1px;
+    padding: 16px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    MUNOOKING604
+    <span>FOREX INTELLIGENCE</span>
+  </div>
+  <nav>
+    <button class="active" onclick="showSection('charts', this)">CHARTS</button>
+    <button onclick="showSection('calc', this)">RISK CALC</button>
+    <button onclick="showSection('liq', this)">LIQUIDITY</button>
+  </nav>
+  <div class="live-badge">
+    <div class="pulse"></div>
+    LIVE
+  </div>
+</header>
+
+<!-- TICKER BAR -->
+<div class="ticker-bar">
+  <div class="ticker-track" id="tickerTrack">
+    <div class="tick-item"><span class="sym">XAUUSD</span><span class="up" id="t-xau">▲ 2,345.60</span></div>
+    <div class="tick-item"><span class="sym">BTCUSD</span><span class="up" id="t-btc">▲ 67,234.00</span></div>
+    <div class="tick-item"><span class="sym">XAGUSD</span><span class="dn" id="t-xag">▼ 29.14</span></div>
+    <div class="tick-item"><span class="sym">EURUSD</span><span class="up">▲ 1.0842</span></div>
+    <div class="tick-item"><span class="sym">GBPUSD</span><span class="dn">▼ 1.2713</span></div>
+    <div class="tick-item"><span class="sym">USDJPY</span><span class="up">▲ 155.34</span></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="tick-item"><span class="sym">XAUUSD</span><span class="up">▲ 2,345.60</span></div>
+    <div class="tick-item"><span class="sym">BTCUSD</span><span class="up">▲ 67,234.00</span></div>
+    <div class="tick-item"><span class="sym">XAGUSD</span><span class="dn">▼ 29.14</span></div>
+    <div class="tick-item"><span class="sym">EURUSD</span><span class="up">▲ 1.0842</span></div>
+    <div class="tick-item"><span class="sym">GBPUSD</span><span class="dn">▼ 1.2713</span></div>
+    <div class="tick-item"><span class="sym">USDJPY</span><span class="up">▲ 155.34</span></div>
+  </div>
+</div>
+
+<main>
+
+<!-- CHARTS SECTION -->
+<div class="section active" id="sec-charts">
+  <div class="sec-title glow">LIVE CHARTS</div>
+  <div class="charts-grid">
+
+    <!-- XAUUSD -->
+    <div class="chart-panel">
+      <div class="chart-header">
+        <span class="chart-sym">XAU/USD</span>
+        <span class="chart-badge bull">GOLD</span>
+      </div>
+      <div class="tradingview-widget-container">
+        <div id="chart-xauusd" style="height:350px;"></div>
+      </div>
+    </div>
+
+    <!-- BTCUSD -->
+    <div class="chart-panel">
+      <div class="chart-header">
+        <span class="chart-sym">BTC/USD</span>
+        <span class="chart-badge bull">CRYPTO</span>
+      </div>
+      <div class="tradingview-widget-container">
+        <div id="chart-btcusd" style="height:350px;"></div>
+      </div>
+    </div>
+
+    <!-- XAGUSD -->
+    <div class="chart-panel">
+      <div class="chart-header">
+        <span class="chart-sym">XAG/USD</span>
+        <span class="chart-badge bear">SILVER</span>
+      </div>
+      <div class="tradingview-widget-container">
+        <div id="chart-xagusd" style="height:350px;"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RISK CALCULATOR SECTION -->
+<div class="section" id="sec-calc">
+  <div class="sec-title glow">RISK CALCULATOR</div>
+  <div class="calc-grid">
+    <div class="panel">
+      <div class="input-group">
+        <label>Pair / Instrument</label>
+        <select id="pair" onchange="updatePairDefaults()">
+          <option value="XAUUSD">XAUUSD — Gold</option>
+          <option value="BTCUSD">BTCUSD — Bitcoin</option>
+          <option value="XAGUSD">XAGUSD — Silver</option>
+          <option value="EURUSD">EURUSD</option>
+          <option value="GBPUSD">GBPUSD</option>
+          <option value="USDJPY">USDJPY</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Account Balance ($)</label>
+        <input type="number" id="balance" value="1000" min="1" placeholder="e.g. 10000">
+      </div>
+      <div class="input-group">
+        <label>Risk % Per Trade</label>
+        <input type="number" id="riskPct" value="1" min="0.1" max="100" step="0.1" placeholder="e.g. 1">
+      </div>
+      <div class="input-group">
+        <label>Entry Price</label>
+        <input type="number" id="entry" value="2345.00" step="0.001" placeholder="e.g. 2345.00">
+      </div>
+      <div class="input-group">
+        <label>Stop Loss Price</label>
+        <input type="number" id="sl" value="2335.00" step="0.001" placeholder="e.g. 2335.00">
+      </div>
+      <div class="input-group">
+        <label>Take Profit Price</label>
+        <input type="number" id="tp" value="2375.00" step="0.001" placeholder="e.g. 2375.00">
+      </div>
+      <div class="input-group">
+        <label>Trade Direction</label>
+        <select id="direction">
+          <option value="buy">BUY / LONG</option>
+          <option value="sell">SELL / SHORT</option>
+        </select>
+      </div>
+      <button class="calc-btn" onclick="calculate()">CALCULATE RISK</button>
+    </div>
+
+    <div class="result-box">
+      <div class="result-title">TRADE ANALYSIS</div>
+      <div class="result-row">
+        <span class="result-label">RISK AMOUNT</span>
+        <span class="result-val loss" id="r-risk">$0.00</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">POTENTIAL PROFIT</span>
+        <span class="result-val gain" id="r-profit">$0.00</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">RISK:REWARD</span>
+        <span class="result-val" id="r-rr">0:0</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">POSITION SIZE (LOTS)</span>
+        <span class="result-val" id="r-lots">0.00</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">STOP LOSS (PIPS)</span>
+        <span class="result-val" id="r-sl-pips">0</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">TAKE PROFIT (PIPS)</span>
+        <span class="result-val" id="r-tp-pips">0</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">MARGIN REQUIRED</span>
+        <span class="result-val" id="r-margin">$0.00</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">WIN RATE NEEDED</span>
+        <span class="result-val" id="r-winrate">0%</span>
+      </div>
+
+      <div style="margin-top:16px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--dim);letter-spacing:1px;margin-bottom:6px;">
+          <span>RISK</span><span>REWARD</span>
+        </div>
+        <div class="rr-bar">
+          <div class="rr-fill" id="rrFill"></div>
+        </div>
+      </div>
+
+      <div id="trade-verdict" style="margin-top:20px;padding:12px;border-radius:3px;text-align:center;font-family:'Orbitron',monospace;font-size:0.75rem;letter-spacing:2px;display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIQUIDITY MAP SECTION -->
+<div class="section" id="sec-liq">
+  <div class="sec-title glow">LIQUIDITY MAP — XAUUSD</div>
+  <div class="liq-container">
+    <div class="liq-canvas-wrap">
+      <canvas id="liqMap" height="500"></canvas>
+    </div>
+    <div class="liq-legend">
+      <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:var(--dim);letter-spacing:2px;margin-bottom:4px;">KEY LEVELS</div>
+      <div id="legendItems"></div>
+
+      <div class="panel" style="margin-top:10px;">
+        <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:2px;margin-bottom:12px;">MARKET BIAS</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center;">
+          <div style="background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);border-radius:3px;padding:12px;">
+            <div style="color:var(--green);font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700;">BULL</div>
+            <div style="color:var(--dim);font-size:0.7rem;margin-top:4px;">62%</div>
+          </div>
+          <div style="background:rgba(255,51,85,0.08);border:1px solid rgba(255,51,85,0.2);border-radius:3px;padding:12px;">
+            <div style="color:var(--red);font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700;">BEAR</div>
+            <div style="color:var(--dim);font-size:0.7rem;margin-top:4px;">38%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:2px;margin-bottom:12px;">SMC ZONES</div>
+        <div id="smcZones"></div>
+      </div>
+
+      <button class="calc-btn" onclick="regenerateLiq()" style="margin-top:0;">REFRESH MAP</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="disclaimer">
+  ⚠ FOR EDUCATIONAL PURPOSES ONLY — NOT FINANCIAL ADVICE — MUNOOKING604 FOREX © 2025
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="active" onclick="showSection('charts', this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    CHARTS
+  </button>
+  <button onclick="showSection('calc', this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    RISK
+  </button>
+  <button onclick="showSection('liq', this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    LIQUIDITY
+  </button>
+</div>
+
+<!-- TradingView Scripts -->
+<script src="https://s3.tradingview.com/tv.js"></script>
+
+<script>
+// ===== NAVIGATION =====
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  document.querySelectorAll('nav button, .mobile-nav button').forEach(b => b.classList.remove('active'));
+  // activate both desktop and mobile
+  document.querySelectorAll('nav button, .mobile-nav button').forEach(b => {
+    if (b.onclick && b.onclick.toString().includes("'" + id + "'")) b.classList.add('active');
+  });
+  if (id === 'liq') drawLiqMap();
+}
+
+// ===== TRADINGVIEW CHARTS =====
+function loadCharts() {
+  const commonConfig = {
+    autosize: true,
+    theme: "dark",
+    style: "1",
+    locale: "en",
+    toolbar_bg: "#0d1b2a",
+    enable_publishing: false,
+    hide_top_toolbar: false,
+    hide_legend: false,
+    save_image: false,
+    backgroundColor: "rgba(6, 13, 20, 1)",
+    gridColor: "rgba(26, 58, 92, 0.3)",
+  };
+
+  new TradingView.widget({
+    ...commonConfig,
+    container_id: "chart-xauusd",
+    symbol: "OANDA:XAUUSD",
+    interval: "H1",
+  });
+
+  new TradingView.widget({
+    ...commonConfig,
+    container_id: "chart-btcusd",
+    symbol: "BINANCE:BTCUSDT",
+    interval: "H1",
+  });
+
+  new TradingView.widget({
+    ...commonConfig,
+    container_id: "chart-xagusd",
+    symbol: "OANDA:XAGUSD",
+    interval: "H1",
+  });
+}
+
+// ===== RISK CALCULATOR =====
+const pairConfig = {
+  XAUUSD: { pipVal: 10, lotSize: 100, contractSize: 100, margin: 1000, decimals: 2 },
+  BTCUSD: { pipVal: 1,  lotSize: 1,   contractSize: 1,   margin: 5000, decimals: 2 },
+  XAGUSD: { pipVal: 50, lotSize: 5000,contractSize: 5000,margin: 200,  decimals: 3 },
+  EURUSD: { pipVal: 10, lotSize: 100000, contractSize: 100000, margin: 500, decimals: 5 },
+  GBPUSD: { pipVal: 10, lotSize: 100000, contractSize: 100000, margin: 500, decimals: 5 },
+  USDJPY: { pipVal: 9.1,lotSize: 100000, contractSize: 100000, margin: 500, decimals: 3 },
+};
+
+function updatePairDefaults() {
+  const p = document.getElementById('pair').value;
+  const defaults = {
+    XAUUSD: [2345.00, 2335.00, 2375.00],
+    BTCUSD: [67000, 66000, 69000],
+    XAGUSD: [29.50, 29.00, 30.50],
+    EURUSD: [1.0842, 1.0800, 1.0920],
+    GBPUSD: [1.2713, 1.2650, 1.2820],
+    USDJPY: [155.34, 154.50, 157.00],
+  };
+  if (defaults[p]) {
+    document.getElementById('entry').value = defaults[p][0];
+    document.getElementById('sl').value = defaults[p][1];
+    document.getElementById('tp').value = defaults[p][2];
+  }
+}
+
+function calculate() {
+  const pair = document.getElementById('pair').value;
+  const balance = parseFloat(document.getElementById('balance').value) || 0;
+  const riskPct = parseFloat(document.getElementById('riskPct').value) || 1;
+  const entry = parseFloat(document.getElementById('entry').value) || 0;
+  const sl = parseFloat(document.getElementById('sl').value) || 0;
+  const tp = parseFloat(document.getElementById('tp').value) || 0;
+  const dir = document.getElementById('direction').value;
+
+  const cfg = pairConfig[pair] || pairConfig.XAUUSD;
+
+  const riskAmt = balance * (riskPct / 100);
+  const slDist = Math.abs(entry - sl);
+  const tpDist = Math.abs(tp - entry);
+
+  // Pip calculation
+  const pipSize = pair.includes('JPY') ? 0.01 : (pair === 'XAUUSD' || pair === 'XAGUSD' || pair === 'BTCUSD' ? 0.1 : 0.0001);
+  const slPips = slDist / pipSize;
+  const tpPips = tpDist / pipSize;
+
+  // Position size
+  const posLots = slPips > 0 ? (riskAmt / (slPips * cfg.pipVal)) : 0;
+
+  // P&L
+  const profit = posLots * tpPips * cfg.pipVal;
+  const rr = slDist > 0 ? (tpDist / slDist) : 0;
+  const winRate = rr > 0 ? Math.round((1 / (1 + rr)) * 100) : 0;
+  const margin = posLots * cfg.margin;
+
+  // Update UI
+  document.getElementById('r-risk').textContent = '$' + riskAmt.toFixed(2);
+  document.getElementById('r-profit').textContent = '$' + profit.toFixed(2);
+  document.getElementById('r-rr').textContent = '1:' + rr.toFixed(2);
+  document.getElementById('r-lots').textContent = posLots.toFixed(2);
+  document.getElementById('r-sl-pips').textContent = slPips.toFixed(1);
+  document.getElementById('r-tp-pips').textContent = tpPips.toFixed(1);
+  document.getElementById('r-margin').textContent = '$' + margin.toFixed(2);
+  document.getElementById('r-winrate').textContent = winRate + '%';
+
+  // RR Bar
+  const fillPct = Math.min((rr / 4) * 100, 100);
+  document.getElementById('rrFill').style.width = fillPct + '%';
+
+  // Verdict
+  const verdict = document.getElementById('trade-verdict');
+  verdict.style.display = 'block';
+  if (rr >= 2) {
+    verdict.style.background = 'rgba(0,255,136,0.1)';
+    verdict.style.border = '1px solid rgba(0,255,136,0.3)';
+    verdict.style.color = '#00ff88';
+    verdict.textContent = '✓ GOOD TRADE — R:R ' + rr.toFixed(1) + 'x';
+  } else if (rr >= 1) {
+    verdict.style.background = 'rgba(255,215,0,0.1)';
+    verdict.style.border = '1px solid rgba(255,215,0,0.3)';
+    verdict.style.color = '#FFD700';
+    verdict.textContent = '⚡ ACCEPTABLE — R:R ' + rr.toFixed(1) + 'x';
+  } else {
+    verdict.style.background = 'rgba(255,51,85,0.1)';
+    verdict.style.border = '1px solid rgba(255,51,85,0.3)';
+    verdict.style.color = '#ff3355';
+    verdict.textContent = '✕ POOR SETUP — R:R ' + rr.toFixed(1) + 'x';
+  }
+}
+
+// ===== LIQUIDITY MAP =====
+let liqLevels = [];
+
+function generateLevels(basePrice) {
+  const levels = [
+    { label: 'BSL (Major)', price: basePrice + 28, type: 'bsl', strength: 95, color: '#00ff88' },
+    { label: 'BSL (Minor)', price: basePrice + 14, type: 'bsl', strength: 65, color: '#00cc66' },
+    { label: 'CURRENT PRICE', price: basePrice, type: 'price', strength: 100, color: '#FFD700' },
+    { label: 'Order Block (Bull)', price: basePrice - 8, type: 'ob_bull', strength: 80, color: '#3388ff' },
+    { label: 'SSL (Minor)', price: basePrice - 16, type: 'ssl', strength: 70, color: '#ff6688' },
+    { label: 'FVG Zone', price: basePrice - 22, type: 'fvg', strength: 55, color: '#aa44ff' },
+    { label: 'SSL (Major)', price: basePrice - 35, type: 'ssl', strength: 90, color: '#ff3355' },
+    { label: 'Order Block (Bear)', price: basePrice - 48, type: 'ob_bear', strength: 75, color: '#ff6600' },
+  ];
+  return levels;
+}
+
+function drawLiqMap() {
+  const canvas = document.getElementById('liqMap');
+  const wrap = canvas.parentElement;
+  canvas.width = wrap.clientWidth;
+  canvas.height = 500;
+  const ctx = canvas.getContext('2d');
+
+  const basePrice = 2345;
+  liqLevels = generateLevels(basePrice + (Math.random() * 10 - 5));
+
+  const W = canvas.width, H = canvas.height;
+  const prices = liqLevels.map(l => l.price);
+  const minP = Math.min(...prices) - 10;
+  const maxP = Math.max(...prices) + 10;
+  const range = maxP - minP;
+
+  ctx.fillStyle = '#060d14';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(26,58,92,0.4)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 10; i++) {
+    const y = (i / 10) * H;
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+  for (let i = 0; i <= 8; i++) {
+    const x = (i / 8) * W;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+
+  // Draw simulated price action (candles area)
+  const chartRight = W - 220;
+
+  // Draw fake price path
+  let pts = [];
+  const startY = H * 0.5;
+  let cy = startY;
+  for (let x = 40; x < chartRight - 20; x += 8) {
+    cy += (Math.random() - 0.48) * 8;
+    cy = Math.max(H * 0.15, Math.min(H * 0.85, cy));
+    pts.push({ x, y: cy });
+  }
+
+  // Draw line
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+  ctx.strokeStyle = 'rgba(255,215,0,0.6)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Fill under line
+  ctx.lineTo(pts[pts.length-1].x, H);
+  ctx.lineTo(pts[0].x, H);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(255,215,0,0.04)';
+  ctx.fill();
+
+  // Draw liquidity levels
+  liqLevels.forEach(lvl => {
+    const y = H - ((lvl.price - minP) / range) * H;
+    const strengthW = (lvl.strength / 100) * (chartRight - 40);
+
+    if (lvl.type !== 'price') {
+      // Strength bar (left side)
+      ctx.fillStyle = lvl.color + '22';
+      ctx.fillRect(20, y - 8, strengthW, 16);
+
+      ctx.fillStyle = lvl.color + '66';
+      ctx.fillRect(20, y - 2, strengthW, 4);
+    }
+
+    // Horizontal line
+    ctx.beginPath();
+    ctx.moveTo(20, y);
+    ctx.lineTo(chartRight, y);
+    if (lvl.type === 'price') {
+      ctx.strokeStyle = '#FFD700';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([]);
+    } else {
+      ctx.strokeStyle = lvl.color;
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Label area (right side)
+    const lx = chartRight + 10;
+    ctx.fillStyle = lvl.color + '22';
+    ctx.fillRect(lx - 4, y - 12, 210, 24);
+    ctx.strokeStyle = lvl.color + '55';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(lx - 4, y - 12, 210, 24);
+
+    ctx.fillStyle = lvl.color;
+    ctx.font = 'bold 10px Rajdhani, sans-serif';
+    ctx.fillText(lvl.label, lx + 2, y - 1);
+    ctx.font = '9px Rajdhani, sans-serif';
+    ctx.fillStyle = '#4a6a8a';
+    ctx.fillText(lvl.price.toFixed(2), lx + 2, y + 10);
+
+    // Liquidity bubbles
+    if (lvl.type === 'bsl' || lvl.type === 'ssl') {
+      const numBubbles = Math.floor(lvl.strength / 15);
+      for (let i = 0; i < numBubbles; i++) {
+        const bx = 30 + Math.random() * (chartRight - 60);
+        ctx.beginPath();
+        ctx.arc(bx, y + (Math.random() * 10 - 5), 3 + Math.random() * 4, 0, Math.PI * 2);
+        ctx.fillStyle = lvl.color + '80';
+        ctx.fill();
+      }
+    }
+  });
+
+  // Current price label
+  const priceLevel = liqLevels.find(l => l.type === 'price');
+  const py = H - ((priceLevel.price - minP) / range) * H;
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 11px Orbitron, monospace';
+  ctx.fillText('▶ ' + priceLevel.price.toFixed(2), chartRight + 10, py + 4);
+
+  // Update legend
+  updateLegend();
+  updateSMCZones();
+}
+
+function updateLegend() {
+  const el = document.getElementById('legendItems');
+  el.innerHTML = liqLevels.filter(l => l.type !== 'price').map(l => `
+    <div class="legend-item" style="margin-bottom:8px;padding:10px;">
+      <div class="l-top">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="legend-dot" style="background:${l.color};"></div>
+          <span class="legend-name" style="color:${l.color};font-size:0.7rem;">${l.label}</span>
+        </div>
+        <span class="legend-strength" style="background:${l.color}22;color:${l.color};border:1px solid ${l.color}44;">${l.strength}%</span>
+      </div>
+      <div class="strength-bar" style="background:rgba(255,255,255,0.05);">
+        <div style="height:100%;width:${l.strength}%;background:${l.color};border-radius:2px;"></div>
+      </div>
+      <div style="font-size:0.68rem;color:#4a6a8a;margin-top:4px;letter-spacing:1px;">${l.price.toFixed(2)}</div>
+    </div>
+  `).join('');
+}
+
+function updateSMCZones() {
+  const el = document.getElementById('smcZones');
+  const zones = [
+    { name: 'PREMIUM ZONE', range: 'Above Current', color: '#ff3355' },
+    { name: 'EQUILIBRIUM', range: '50% Level', color: '#FFD700' },
+    { name: 'DISCOUNT ZONE', range: 'Below Current', color: '#00ff88' },
+  ];
+  el.innerHTML = zones.map(z => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(26,58,92,0.4);">
+      <span style="font-size:0.7rem;color:${z.color};font-weight:700;letter-spacing:1px;">${z.name}</span>
+      <span style="font-size:0.65rem;color:#4a6a8a;">${z.range}</span>
+    </div>
+  `).join('');
+}
+
+function regenerateLiq() { drawLiqMap(); }
+
+// ===== INIT =====
+window.addEventListener('load', () => {
+  loadCharts();
+  calculate();
+
+  window.addEventListener('resize', () => {
+    if (document.getElementById('sec-liq').classList.contains('active')) {
+      drawLiqMap();
+    }
+  });
+});
+</script>
+</body>
+</html>
